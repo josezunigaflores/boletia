@@ -1,0 +1,17 @@
+version: '3'
+
+tasks:
+  test:
+    cmds:
+      - go test -race $(go list ./... | grep -v /vendor/) -v -coverprofile coverage.out
+      - go test -json > report.json
+      - go tool cover -func coverage.out
+  coverage:
+    cmds:
+      - go test ./... -coverprofile=./c.out
+      - go tool cover -html=./c.out -o ./coverage.html
+      - go tool cover -func=./c.out
+
+  lint:
+    cmds:
+      - golangci-lint run ./... --config=golangci.yml

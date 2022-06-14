@@ -1,0 +1,37 @@
+version: '3'
+services:
+  dbpostgres:
+    restart: always
+    image: postgres:10.11
+    container_name: dbpostgresboletia
+    networks:
+      boletia:
+        aliases:
+          - dbpostgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./recursos/db/postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: developer
+      POSTGRES_PASSWORD: Clever.Dev
+      POSTGRES_DB: clever
+  boletiaservice:
+    build:
+      context: docker/app
+    volumes:
+      - ./internal:/go/boletia/internal
+      - ./cmd/:/go/boletia/cmd
+      - ./go.mod:/go/boletia/go.mod
+    #      - ./service-account-file.json:$SERVICE_ACCOUNT_FILE
+    working_dir: /go/boletia/cmd/api
+    ports:
+      - "8181:8080"
+    environment:
+      SERVER_TO_RUN: http
+    networks:
+      boletia:
+        aliases:
+          - beers
+networks:
+  boletia:
