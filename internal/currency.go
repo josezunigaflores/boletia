@@ -1,6 +1,9 @@
 package internal
 
-import "time"
+import (
+	"boletia/kit/event"
+	"time"
+)
 
 type Currency struct {
 	Code  string
@@ -8,7 +11,11 @@ type Currency struct {
 }
 
 type RepositoryHttp interface {
-	GetCurrencies() (Currencies, *MetaData, error)
+	GetCurrencies() (Currencies, *MetaData, event.Event, error)
+}
+
+type RepositoryCurrency interface {
+	CreateCurrencies(currencies Currencies, data MetaData) error
 }
 
 type Currencies []Currency

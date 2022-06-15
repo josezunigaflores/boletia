@@ -30,7 +30,7 @@ func TestRepositoryCurrency_GetCurrencies(t *testing.T) {
 			w.WriteHeader(http.StatusOK)
 		}))
 		r := NewRepositoryCurrency(server.URL, timeout)
-		c, m, err := r.GetCurrencies()
+		c, m, _, err := r.GetCurrencies()
 		assert.NoError(t, err)
 		log.Info(c, m)
 	})

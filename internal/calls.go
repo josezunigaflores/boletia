@@ -9,3 +9,7 @@ type Call struct {
 }
 
 type Calls []Call
+
+type RepositoryCalls interface {
+	CreateCall(dateExecuteTime time.Time, duration time.Duration, status string) error
+}

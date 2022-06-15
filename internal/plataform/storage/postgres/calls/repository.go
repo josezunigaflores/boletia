@@ -22,7 +22,7 @@ func NewCallRepository(db *gorm.DB) Repository {
 func (r *Repository) CreateCall(dateExecuteTime time.Time, duration time.Duration, status string) error {
 	tx := r.db.Begin()
 	defer tx.Rollback()
-	if err := tx.Model(sqlTableName).Create(&SQLCall{
+	if err := tx.Table(sqlTableName).Create(&SQLCall{
 		DateExecuteTime: dateExecuteTime,
 		Duration:        duration,
 		Status:          status,

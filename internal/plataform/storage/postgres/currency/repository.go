@@ -33,7 +33,7 @@ func (r *Repository) CreateCurrencies(currencies internal.Currencies, data inter
 }
 
 func (r *Repository) CreateCurrency(code string, value float64, lastUpdatedAt time.Time) error {
-	return r.tx.Model(sqlTableName).Create(&SQLCurrency{
+	return r.tx.Table(sqlTableName).Create(&SQLCurrency{
 		Code:          code,
 		Value:         value,
 		LastUpdatedAt: lastUpdatedAt,
