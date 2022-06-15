@@ -20,13 +20,13 @@ func (b BadRequestError) Code() int {
 
 func (b BadRequestError) Message(format string, data ...interface{}) string {
 	if format != "" {
-		return fmt.Sprintf(format, data)
+		return fmt.Sprintf(format, data...)
 	}
 	if len(data) > 0 {
 		return fmt.Sprintf("Bad request by %s", data)
 	}
 
-	return fmt.Sprintf("Bad request")
+	return "Bad request"
 }
 
 func (b BadRequestError) Error() string {

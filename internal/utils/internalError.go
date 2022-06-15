@@ -20,12 +20,13 @@ func (i InternalResponseError) Code() int {
 
 func (i InternalResponseError) Message(format string, data ...interface{}) string {
 	if format != "" {
-		return fmt.Sprintf(format, data)
+		return fmt.Sprintf(format, data...)
 	}
 	if len(data) > 0 {
 		return fmt.Sprintf("Error getting the source %s", data)
 	}
-	return fmt.Sprintf("The server not responsed correctly")
+
+	return "The server not responses correctly"
 }
 
 func (i InternalResponseError) Error() string {
