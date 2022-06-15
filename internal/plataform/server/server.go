@@ -4,13 +4,16 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	swaggerFiles "github.com/swaggo/files"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"time"
 
+	_ "boletia/docs"
 	"github.com/gin-gonic/gin"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 type Server struct {
@@ -32,6 +35,7 @@ func New(ctx context.Context, host string, port uint, shutdownTimeout time.Durat
 }
 
 func (s *Server) registerRoutes() {
+	s.engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	api := s.engine.Group("api/v1")
 	_ = api
 }
