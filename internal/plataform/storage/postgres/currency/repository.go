@@ -29,6 +29,7 @@ func (r *Repository) CreateCurrencies(currencies internal.Currencies, data inter
 			return fmt.Errorf("%w:%s", ErrCreatingCurrencies, err)
 		}
 	}
+
 	return r.tx.Commit().Error
 }
 
@@ -47,6 +48,7 @@ func (r *Repository) FindWithDate(code internal.Code, finit, fend internal.Filte
 	if err != nil {
 		return nil, err
 	}
+
 	return currencies.ToCurrencies()
 }
 

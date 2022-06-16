@@ -2,8 +2,9 @@ package event
 
 import (
 	"context"
-	"github.com/google/uuid"
 	"time"
+
+	"github.com/google/uuid"
 )
 
 // Bus defines the expected behaviour from an event bus.

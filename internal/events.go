@@ -2,8 +2,9 @@ package internal
 
 import (
 	"boletia/kit/event"
-	"github.com/google/uuid"
 	"time"
+
+	"github.com/google/uuid"
 )
 
 const CurrencyFailEventType event.Type = "events.currency.fail"

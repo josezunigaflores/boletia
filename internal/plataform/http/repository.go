@@ -31,6 +31,7 @@ func (rc RepositoryCurrency) GetCurrencies() (internal.Currencies, *internal.Met
 	if err != nil {
 		return nil, nil, internal.NewCurrencyFailEvent(time.Now().UTC(), rc.client.Timeout, fail), err
 	}
+	defer resp.Body.Close()
 	bts, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, nil, internal.NewCurrencyFailEvent(time.Now().UTC(), rc.client.Timeout, fail), err

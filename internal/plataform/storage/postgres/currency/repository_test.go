@@ -56,7 +56,6 @@ func TestRepository_FindWithDate(t *testing.T) {
 		require.NoError(t, err)
 		q := `SELECT * FROM "currency" WHERE (code = $1 AND last_updated_at >= $2 AND last_updated_at < $3) AND "currency"."deleted_at" IS NULL`
 		mock.ExpectQuery(q).
-			//"created_at", "updated_at","deleted_at"
 			WillReturnRows(sqlmock.NewRows([]string{"code", "value"}).
 				AddRow(faker.Word(), 10.0))
 		s := NewRepository(gormDB)
