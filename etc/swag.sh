@@ -1,0 +1,1 @@
+swag init --parseDependency --parseInternal -d cmd/api
