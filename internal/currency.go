@@ -43,7 +43,7 @@ var (
 )
 
 func NewCode(code string) (Code, error) {
-	if len(code) > 0 {
+	if len(code) == 0 {
 		return "", ErrBadCode
 	}
 

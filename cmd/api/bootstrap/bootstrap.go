@@ -54,7 +54,7 @@ func Run() error {
 	serviceCurrency := currency.NewServiceCurrency(&currencyRep)
 	callRepository := calls.NewCallRepository(db)
 	cmd := currency.NewCurrencyHandler(serviceCurrency)
-	timer := schedule.NewServiceSchedule(&currencyHTPP, &currencyRep, cnf.TimeOut, eventBus)
+	timer := schedule.NewServiceSchedule(&currencyHTPP, &currencyRep, cnf.Schedule, cnf.TimeOut, eventBus)
 	go timer.Do()
 	eventBus.Subscribe(internal.CurrencyFailEventType, schedule.NewEvent(&callRepository))
 	commandBus.Register(currency.CurrencyCommandType, cmd)
