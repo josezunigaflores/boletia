@@ -13,7 +13,7 @@ const docTemplate = `{
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
             "name": "API Support",
-            "url": "boletia",
+            "url": "BOLETIA",
             "email": "team@boletia"
         },
         "license": {
@@ -24,7 +24,99 @@ const docTemplate = `{
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
-    "paths": {}
+    "paths": {
+        "/api/v1/currencies/:id": {
+            "get": {
+                "description": "the source find within all currencies and returns these.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "currencies"
+                ],
+                "summary": "Getting all currency or specific currency.",
+                "responses": {
+                    "201": {
+                        "description": "Response general",
+                        "schema": {
+                            "$ref": "#/definitions/currency.ResponseCurrencies"
+                        }
+                    },
+                    "400": {
+                        "description": "Response with error field",
+                        "schema": {
+                            "$ref": "#/definitions/utils.HTTPResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Response for any error in server",
+                        "schema": {
+                            "$ref": "#/definitions/utils.HTTPResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "currency.ResponseCurrencies": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/internal.Currency"
+                    }
+                },
+                "error": {
+                    "type": "string",
+                    "example": "error get some source"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Success load the source"
+                }
+            }
+        },
+        "internal.Currency": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "lastUpdatedAt": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "number"
+                }
+            }
+        },
+        "utils.HTTPResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "error": {
+                    "type": "string",
+                    "example": "error get some source"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Success load the source"
+                }
+            }
+        }
+    }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it

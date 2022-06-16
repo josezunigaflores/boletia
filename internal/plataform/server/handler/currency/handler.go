@@ -1,6 +1,7 @@
 package currency
 
 import (
+	"boletia/internal"
 	"boletia/internal/currency"
 	"boletia/internal/utils"
 	"boletia/kit/command"
@@ -13,7 +14,7 @@ import (
 // @Tags         currencies
 // @Accept       json
 // @Produce      json
-// @Success  201  {object} utils.HTTPResponse true "Response general"
+// @Success  201  {object} ResponseCurrencies true "Response general"
 // @Failure  400 {object} utils.HTTPResponse true "Response with error field"
 // @Failure  500 {object} utils.HTTPResponse true  "Response for any error in server"
 // @Router       /api/v1/currencies/:id [GET].
@@ -23,11 +24,22 @@ func GetCurrencies(bus command.Bus) gin.HandlerFunc {
 		find := ctx.Query("finit")
 		fend := ctx.Query("fend")
 		response, _ := bus.Dispatch(ctx, currency.NewCurrencyCommand(c, find, fend))
-		ctx.JSON(response.Code(), utils.HTTPResponse{
-			Code:    response.Code(),
-			Message: response.Message(""),
-			Error:   response.Error(),
-			Data:    response.Data(),
+		data, ok := response.Data().(internal.Currencies)
+		if !ok {
+			data = nil
+		}
+		ctx.JSON(response.Code(), ResponseCurrencies{
+			HTTPResponse: utils.HTTPResponse{
+				Code:    response.Code(),
+				Message: response.Message(""),
+				Error:   response.Error(),
+			},
+			Data: data,
 		})
 	}
+}
+
+type ResponseCurrencies struct {
+	utils.HTTPResponse
+	Data internal.Currencies
 }

@@ -8,8 +8,7 @@ type Response interface {
 }
 
 type HTTPResponse struct {
-	Code    int         `json:"code,omitempty" example:"200"`
-	Message string      `json:"message,omitempty" example:"Success load the source"`
-	Error   string      `json:"error,omitempty" example:"error get some source"`
-	Data    interface{} `json:"data" example:"this field could be array and object"`
+	Code    int    `json:"code,omitempty" example:"200"`
+	Message string `json:"message,omitempty" example:"Success load the source"`
+	Error   string `json:"error,omitempty" example:"error get some source"`
 }

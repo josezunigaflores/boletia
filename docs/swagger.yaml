@@ -1,10 +1,48 @@
 basePath: /
+definitions:
+  currency.ResponseCurrencies:
+    properties:
+      code:
+        example: 200
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/internal.Currency'
+        type: array
+      error:
+        example: error get some source
+        type: string
+      message:
+        example: Success load the source
+        type: string
+    type: object
+  internal.Currency:
+    properties:
+      code:
+        type: string
+      lastUpdatedAt:
+        type: string
+      value:
+        type: number
+    type: object
+  utils.HTTPResponse:
+    properties:
+      code:
+        example: 200
+        type: integer
+      error:
+        example: error get some source
+        type: string
+      message:
+        example: Success load the source
+        type: string
+    type: object
 host: localhost:8080
 info:
   contact:
     email: team@boletia
     name: API Support
-    url: boletia
+    url: BOLETIA
   description: This project query to currency api and change the values.
   license:
     name: Apache 2.0
@@ -12,5 +50,28 @@ info:
   termsOfService: http://swagger.io/terms/
   title: Currencies
   version: "1.0"
-paths: {}
+paths:
+  /api/v1/currencies/:id:
+    get:
+      consumes:
+      - application/json
+      description: the source find within all currencies and returns these.
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Response general
+          schema:
+            $ref: '#/definitions/currency.ResponseCurrencies'
+        "400":
+          description: Response with error field
+          schema:
+            $ref: '#/definitions/utils.HTTPResponse'
+        "500":
+          description: Response for any error in server
+          schema:
+            $ref: '#/definitions/utils.HTTPResponse'
+      summary: Getting all currency or specific currency.
+      tags:
+      - currencies
 swagger: "2.0"

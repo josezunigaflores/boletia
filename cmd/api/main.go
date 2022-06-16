@@ -3,6 +3,7 @@ package main
 import (
 	"boletia/cmd/api/bootstrap"
 	_ "boletia/docs"
+	_ "boletia/internal/plataform/server/handler/currency"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -12,14 +13,14 @@ import (
 // @termsOfService  http://swagger.io/terms/
 
 // @contact.name   API Support
-// @contact.url    boletia
+// @contact.url    BOLETIA
 // @contact.email  team@boletia
 
 // @license.name  Apache 2.0
 // @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
 
 // @host      localhost:8080
-// @BasePath  /.
+// @BasePath  /
 func main() {
 	if err := bootstrap.Run(); err != nil {
 		log.Fatal(err)
