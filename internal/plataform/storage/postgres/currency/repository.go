@@ -44,7 +44,7 @@ func (r *Repository) CreateCurrency(code string, value float64, lastUpdatedAt ti
 func (r *Repository) FindWithDate(code internal.Code, finit, fend internal.FilterTime) (internal.Currencies, error) {
 	currencies := make(Currencies, 0)
 	err := r.db.Table(sqlTableName).
-		Where("code = ? AND  last_updated_at >= ? AND last_updated_at < ?", code, finit, fend).Find(&currencies).Error
+		Where("code = ? AND  last_updated_at >= ? AND last_updated_at < ?", code, time.Time(finit), time.Time(fend)).Find(&currencies).Error
 	if err != nil {
 		return nil, err
 	}

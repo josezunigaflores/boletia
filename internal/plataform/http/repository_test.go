@@ -8,8 +8,6 @@ import (
 	"net/http/httptest"
 	"os"
 	"testing"
-
-	log "github.com/sirupsen/logrus"
 )
 
 const timeout = 60
@@ -31,9 +29,8 @@ func TestRepositoryCurrency_GetCurrencies(t *testing.T) {
 			w.WriteHeader(http.StatusOK)
 		}))
 		r := NewRepositoryCurrency(server.URL, timeout)
-		c, m, _, err := r.GetCurrencies()
+		_, _, _, err := r.GetCurrencies()
 		assert.NoError(t, err)
-		log.Info(c, m)
 	})
 }
 

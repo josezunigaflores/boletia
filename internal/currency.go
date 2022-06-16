@@ -13,14 +13,17 @@ type Currency struct {
 	LastUpdatedAt time.Time
 }
 
+//go:generate mockery --case=snake --outpkg=mocks --output=mocks --name=RepositoryHttp
 type RepositoryHttp interface {
 	GetCurrencies() (Currencies, *MetaData, event.Event, error)
 }
 
+//go:generate mockery --case=snake --outpkg=mocks --output=mocks --name=RepositoryCurrency
 type RepositoryCurrency interface {
 	CreateCurrencies(currencies Currencies, data MetaData) error
 }
 
+//go:generate mockery --case=snake --outpkg=mocks --output=mocks --name=RepositoryCurrencyFind
 type RepositoryCurrencyFind interface {
 	FindWithDate(code Code, finit, fend FilterTime) (Currencies, error)
 	Find() (Currencies, error)
@@ -54,7 +57,8 @@ func (c Code) IsAll() bool {
 	return c == "all"
 }
 
-const layout = "YYYY-MM-DDThh:mm:ss"
+//"YYYY-MM-DDThh:mm:ss"
+const layout = "2006-01-02T15:04:05"
 
 func NewTimeFilter(t string) (FilterTime, error) {
 	if len(t) == 0 {

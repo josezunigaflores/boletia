@@ -28,7 +28,7 @@ func TestRepository_CreateCall(t *testing.T) {
 	)
 
 	assert.NoError(t, err)
-	q := `INSERT INTO "call" ("date_execute_time","duration","status") VALUES ($1,$2,$3)`
+	q := `INSERT INTO "sql_call" ("date_execute_time","duration","status") VALUES ($1,$2,$3)`
 	mock.ExpectBegin()
 	mock.ExpectExec(q).
 		WithArgs(dateExecuteTime, duration, status).

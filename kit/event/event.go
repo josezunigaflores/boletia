@@ -8,6 +8,7 @@ import (
 )
 
 // Bus defines the expected behaviour from an event bus.
+
 type Bus interface {
 	// Publish is the method used to publish new events.
 	Publish(context.Context, []Event) error
@@ -26,6 +27,8 @@ type Handler interface {
 type Type string
 
 // Event represents a domain command.
+//go:generate mockery --case=snake --outpkg=eventmocks --output=eventmocks --name=Event
+
 type Event interface {
 	ID() string
 	AggregateID() string
