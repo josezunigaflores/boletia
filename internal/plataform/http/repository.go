@@ -4,6 +4,7 @@ import (
 	"boletia/internal"
 	"boletia/kit/event"
 	"encoding/json"
+	log "github.com/sirupsen/logrus"
 	"io"
 	"net/http"
 	"time"
@@ -44,6 +45,7 @@ func (rc RepositoryCurrency) GetCurrencies() (internal.Currencies, *internal.Met
 	if err != nil {
 		return nil, nil, internal.NewCurrencyFailEvent(time.Now().UTC(), rc.client.Timeout, fail), err
 	}
+	log.Info(c)
 	currencies, err := c.Data.getCurrency()
 	if err != nil {
 		return nil, nil, internal.NewCurrencyFailEvent(time.Now().UTC(), rc.client.Timeout, fail), err

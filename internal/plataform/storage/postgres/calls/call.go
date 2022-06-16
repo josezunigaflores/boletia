@@ -2,7 +2,7 @@ package calls
 
 import "time"
 
-const sqlTableName = "call"
+const sqlTableName = "sql_call"
 
 type SQLCall struct {
 	DateExecuteTime time.Time

@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-const sqlTableName = "currency"
+const sqlTableName = "sql_currency"
 
 type SQLCurrency struct {
 	postgres.Model

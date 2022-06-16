@@ -3,7 +3,7 @@ package main
 import (
 	"boletia/cmd/api/bootstrap"
 	_ "boletia/docs"
-	"log"
+	log "github.com/sirupsen/logrus"
 )
 
 // @title           Currencies

@@ -25,15 +25,18 @@ func (s Service) Do() {
 		ctx, cancel := context.WithTimeout(background, time.Duration(s.timeOut)*time.Second)
 		<-ctx.Done()
 		currencies, meta, evnt, err := s.Request.GetCurrencies()
+		if err := s.eventBus.Publish(context.Background(), append([]event.Event{}, evnt)); err != nil {
+			log.Error(err)
+		}
 		if err != nil {
 			// should save in anyplace
 			log.Error(err)
 		}
+
 		if err := s.Repository.CreateCurrencies(currencies, *meta); err != nil {
 			log.Error(err)
-		}
-		if err := s.eventBus.Publish(context.Background(), append([]event.Event{}, evnt)); err != nil {
-			log.Error(err)
+
+			continue
 		}
 		cancel()
 	}

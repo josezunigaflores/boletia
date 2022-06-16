@@ -9,6 +9,7 @@ import (
 	"boletia/internal/plataform/server"
 	"boletia/internal/plataform/storage/postgres/calls"
 	currencyRepository "boletia/internal/plataform/storage/postgres/currency"
+	"boletia/internal/plataform/storage/postgres/migrator"
 	"boletia/internal/schedule"
 	"context"
 	"fmt"
@@ -30,7 +31,7 @@ func Run() error {
 	cnf := config.Config
 
 	postgresURI := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s", config.Config.DBHost, config.Config.DBPort, config.Config.DBUser, config.Config.DBPass, config.Config.DBName)
-	dbGorm, err := gorm.Open(postgres.Open(postgresURI), &gorm.Config{
+	db, err := gorm.Open(postgres.Open(postgresURI), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 		NamingStrategy: schema.NamingStrategy{
 			TablePrefix:   "",
@@ -42,10 +43,16 @@ func Run() error {
 	if err != nil {
 		return err
 	}
+
+	initMigrator := migrator.NewInitialsRepository(db)
+	if err := initMigrator.CreateTables(); err != nil {
+		return err
+	}
+
 	currencyHTPP := http.NewRepositoryCurrency(cnf.PathCurrency, cnf.TimeOut)
-	currencyRep := currencyRepository.NewRepository(dbGorm)
+	currencyRep := currencyRepository.NewRepository(db)
 	serviceCurrency := currency.NewServiceCurrency(&currencyRep)
-	callRepository := calls.NewCallRepository(dbGorm)
+	callRepository := calls.NewCallRepository(db)
 	cmd := currency.NewCurrencyHandler(serviceCurrency)
 	timer := schedule.NewServiceSchedule(&currencyHTPP, &currencyRep, cnf.TimeOut, eventBus)
 	go timer.Do()

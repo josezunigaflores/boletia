@@ -57,6 +57,9 @@ func (c Code) IsAll() bool {
 const layout = "YYYY-MM-DDThh:mm:ss"
 
 func NewTimeFilter(t string) (FilterTime, error) {
+	if len(t) == 0 {
+		return FilterTime(time.Now().UTC()), ErrBadTimeFilter
+	}
 	newTime, err := time.Parse(layout, t)
 	if err != nil {
 		return FilterTime(newTime), fmt.Errorf("%w:%s", ErrBadTimeFilter, err)

@@ -26,5 +26,5 @@ func (h SuccessCurrency) Error() string {
 }
 
 func (h SuccessCurrency) Data() interface{} {
-	return h
+	return h.data
 }
