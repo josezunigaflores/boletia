@@ -36,6 +36,7 @@ func (ch CurrencyHandler) Handle(ctx context.Context, cmd command.Command) (resp
 	if !ok {
 		err := errors.New("unexpected command")
 		response = utils.NewInternalErrResponse(err, err)
+
 		return response, err
 	}
 	currencies, err := ch.service.FindCurrency(cc.code, cc.finit, cc.fend)

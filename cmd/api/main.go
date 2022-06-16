@@ -19,7 +19,7 @@ import (
 // @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
 
 // @host      localhost:8080
-// @BasePath  /
+// @BasePath  /.
 func main() {
 	if err := bootstrap.Run(); err != nil {
 		log.Fatal(err)

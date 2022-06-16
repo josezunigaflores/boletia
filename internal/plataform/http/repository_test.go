@@ -25,6 +25,7 @@ func TestRepositoryCurrency_GetCurrencies(t *testing.T) {
 			assert.NoError(t, err)
 			if _, err := w.Write(buffer); err != nil {
 				w.WriteHeader(http.StatusInternalServerError)
+
 				return
 			}
 			w.WriteHeader(http.StatusOK)

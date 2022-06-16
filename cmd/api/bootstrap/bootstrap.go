@@ -11,7 +11,6 @@ import (
 	currencyRepository "boletia/internal/plataform/storage/postgres/currency"
 	"boletia/internal/schedule"
 	"context"
-	"database/sql"
 	"fmt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -31,10 +30,6 @@ func Run() error {
 	cnf := config.Config
 
 	postgresURI := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s", config.Config.DBHost, config.Config.DBPort, config.Config.DBUser, config.Config.DBPass, config.Config.DBName)
-	db, err := sql.Open("postgres", postgresURI)
-	if err != nil {
-		return err
-	}
 	dbGorm, err := gorm.Open(postgres.Open(postgresURI), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 		NamingStrategy: schema.NamingStrategy{
@@ -44,13 +39,15 @@ func Run() error {
 			NoLowerCase:   false,
 		},
 	})
-
-	currencyHtpp := http.NewRepositoryCurrency(cnf.PathCurrency, cnf.TimeOut)
+	if err != nil {
+		return err
+	}
+	currencyHTPP := http.NewRepositoryCurrency(cnf.PathCurrency, cnf.TimeOut)
 	currencyRep := currencyRepository.NewRepository(dbGorm)
 	serviceCurrency := currency.NewServiceCurrency(&currencyRep)
 	callRepository := calls.NewCallRepository(dbGorm)
 	cmd := currency.NewCurrencyHandler(serviceCurrency)
-	timer := schedule.NewServiceSchedule(&currencyHtpp, &currencyRep, cnf.TimeOut, eventBus)
+	timer := schedule.NewServiceSchedule(&currencyHTPP, &currencyRep, cnf.TimeOut, eventBus)
 	go timer.Do()
 	eventBus.Subscribe(internal.CurrencyFailEventType, schedule.NewEvent(&callRepository))
 	commandBus.Register(currency.CurrencyCommandType, cmd)

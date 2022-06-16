@@ -26,5 +26,6 @@ func (c Currencies) ToCurrencies() (internal.Currencies, error) {
 			LastUpdatedAt: currency.LastUpdatedAt,
 		})
 	}
+
 	return currencies, nil
 }

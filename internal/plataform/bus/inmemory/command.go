@@ -22,6 +22,7 @@ func (b *CommandBus) Dispatch(ctx context.Context, cmd command.Command) (utils.R
 	if !ok {
 		return nil, nil
 	}
+
 	return handler.Handle(ctx, cmd)
 }
 

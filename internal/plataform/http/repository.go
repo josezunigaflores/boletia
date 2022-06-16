@@ -22,6 +22,7 @@ type RepositoryCurrency struct {
 func NewRepositoryCurrency(path string, timeOut int) RepositoryCurrency {
 	c := http.Client{}
 	c.Timeout = time.Duration(timeOut) * time.Second
+
 	return RepositoryCurrency{path: path, client: c}
 }
 
