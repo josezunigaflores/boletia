@@ -7,11 +7,15 @@ import (
 	"errors"
 )
 
-type EventFail struct {
+type Event struct {
 	repository internal.RepositoryCalls
 }
 
-func (e EventFail) Handle(_ context.Context, evt event.Event) error {
+func NewEvent(repository internal.RepositoryCalls) *Event {
+	return &Event{repository: repository}
+}
+
+func (e Event) Handle(_ context.Context, evt event.Event) error {
 	courseCreatedEvt, ok := evt.(internal.CurrencyEvent)
 	if !ok {
 		return errors.New("unexpected event")

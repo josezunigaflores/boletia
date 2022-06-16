@@ -1,6 +1,8 @@
 package server
 
 import (
+	"boletia/internal/plataform/server/handler/currency"
+	"boletia/kit/command"
 	"context"
 	"errors"
 	"fmt"
@@ -20,14 +22,17 @@ type Server struct {
 	httpAddr        string
 	engine          *gin.Engine
 	shutdownTimeout time.Duration
+	// deps
+	commandBus command.Bus
 }
 
-func New(ctx context.Context, host string, port uint, shutdownTimeout time.Duration) (context.Context, Server) {
+func New(ctx context.Context, host string, port uint, shutdownTimeout time.Duration, commandBus command.Bus) (context.Context, Server) {
 	srv := Server{
 		engine:   gin.New(),
 		httpAddr: fmt.Sprintf(":%d", port),
 
 		shutdownTimeout: shutdownTimeout,
+		commandBus:      commandBus,
 	}
 	srv.registerRoutes()
 
@@ -37,7 +42,7 @@ func New(ctx context.Context, host string, port uint, shutdownTimeout time.Durat
 func (s *Server) registerRoutes() {
 	s.engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	api := s.engine.Group("api/v1")
-	_ = api
+	api.GET("currencies/:id", currency.GetCurrencies(s.commandBus))
 }
 
 func (s *Server) Run(ctx context.Context) error {
