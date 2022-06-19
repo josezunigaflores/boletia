@@ -3,6 +3,7 @@ package migrator
 import (
 	"boletia/internal/plataform/storage/postgres/calls"
 	"boletia/internal/plataform/storage/postgres/currency"
+
 	"gorm.io/gorm"
 )
 

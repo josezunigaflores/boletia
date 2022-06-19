@@ -4,8 +4,9 @@ import (
 	"boletia/internal"
 	"boletia/kit/event"
 	"context"
-	log "github.com/sirupsen/logrus"
 	"time"
+
+	log "github.com/sirupsen/logrus"
 )
 
 type Service struct {
@@ -16,7 +17,7 @@ type Service struct {
 	eventBus       event.Bus
 }
 
-func NewServiceSchedule(request internal.RepositoryHTTP, repository internal.RepositoryCurrency, timeOut, timeOutRequest int, eventBus event.Bus) *Service { // nolint:whitespace
+func NewServiceSchedule(request internal.RepositoryHTTP, repository internal.RepositoryCurrency, timeOut, timeOutRequest int, eventBus event.Bus) *Service { // nolint:whitespace,lll,nolintlint
 	return &Service{Request: request, Repository: repository, timeOut: timeOut,
 		eventBus: eventBus, timeOutRequest: timeOutRequest}
 }

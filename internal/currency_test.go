@@ -1,9 +1,10 @@
 package internal
 
 import (
+	"testing"
+
 	"github.com/bxcodec/faker/v3"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestNewTimeFilter(t *testing.T) {

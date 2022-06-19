@@ -1,10 +1,11 @@
 package internal
 
 import (
-	"github.com/bxcodec/faker/v3"
-	"github.com/stretchr/testify/assert"
 	"testing"
 	"time"
+
+	"github.com/bxcodec/faker/v3"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestCurrencyEvent_DateExecuteTime(t *testing.T) {

@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-type SuccessCurrency struct { //nolint: nolintlint
+type SuccessCurrency struct { //nolint: nolintlint,errname
 	data internal.Currencies
 }
 
