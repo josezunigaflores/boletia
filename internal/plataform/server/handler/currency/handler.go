@@ -23,7 +23,9 @@ func GetCurrencies(bus command.Bus) gin.HandlerFunc {
 		c := ctx.Param("id")
 		find := ctx.Query("finit")
 		fend := ctx.Query("fend")
-		response, _ := bus.Dispatch(ctx, currency.NewCurrencyCommand(c, find, fend))
+		// is not necessary check the error because.
+		// the struct that returns this function content the error.
+		response, _ := bus.Dispatch(ctx, currency.NewCurrencyCommand(c, find, fend)) // nolint:
 		data, ok := response.Data().(internal.Currencies)
 		if !ok {
 			data = nil

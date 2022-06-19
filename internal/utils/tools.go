@@ -15,7 +15,7 @@ func IsEmpty(object interface{}) bool {
 
 	objValue := reflect.ValueOf(object)
 
-	switch objValue.Kind() {
+	switch objValue.Kind() { // nolint:exhaustive
 	// collection types are empty when they have no element
 	case reflect.Array, reflect.Chan, reflect.Map, reflect.Slice:
 		return objValue.Len() == 0

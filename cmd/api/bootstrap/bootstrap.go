@@ -13,11 +13,12 @@ import (
 	"boletia/internal/schedule"
 	"context"
 	"fmt"
+	"time"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
-	"time"
 )
 
 func Run() error {
@@ -30,7 +31,8 @@ func Run() error {
 	)
 	cnf := config.Config
 
-	postgresURI := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s", config.Config.DBHost, config.Config.DBPort, config.Config.DBUser, config.Config.DBPass, config.Config.DBName)
+	postgresURI := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s",
+		cnf.DBHost, cnf.DBPort, cnf.DBUser, cnf.DBPass, cnf.DBName)
 	db, err := gorm.Open(postgres.Open(postgresURI), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 		NamingStrategy: schema.NamingStrategy{

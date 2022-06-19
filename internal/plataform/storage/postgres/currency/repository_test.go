@@ -62,7 +62,8 @@ func TestRepository_FindWithDate(t *testing.T) {
 		t2, errF1 := internal.NewTimeFilter("2022-12-28T20:15:00")
 		assert.NoError(t, errF1)
 		require.NoError(t, err)
-		q := `SELECT * FROM "sql_currency" WHERE (code = $1 AND last_updated_at >= $2 AND last_updated_at < $3) AND "sql_currency"."deleted_at" IS NULL`
+		q := `SELECT * FROM "sql_currency" WHERE (code = $1 AND last_updated_at >= $2 AND last_updated_at < $3)
+AND "sql_currency"."deleted_at" IS NULL`
 		mock.ExpectQuery(q).
 			WithArgs(faker.Word(), t1, t2).
 			WillReturnRows(sqlmock.NewRows([]string{"code", "value"}).
@@ -73,11 +74,12 @@ func TestRepository_FindWithDate(t *testing.T) {
 		assert.NoError(t, mock.ExpectationsWereMet())
 		assert.NoError(t, err)
 	})
-}
+}.
 */
 type AnyTime struct{}
 
 func (a AnyTime) Match(v driver.Value) bool {
 	_, ok := v.(time.Time)
+
 	return ok
 }

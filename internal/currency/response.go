@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-type SuccessCurrency struct {
+type SuccessCurrency struct { //nolint: ineffassign
 	data internal.Currencies
 }
 

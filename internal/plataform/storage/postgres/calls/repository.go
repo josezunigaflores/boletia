@@ -29,5 +29,6 @@ func (r *Repository) CreateCall(dateExecuteTime time.Time, duration time.Duratio
 	}).Error; err != nil {
 		return fmt.Errorf("%w:%s", ErrCreateCall, err)
 	}
+
 	return tx.Commit().Error
 }

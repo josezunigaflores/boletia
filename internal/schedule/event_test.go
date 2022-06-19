@@ -12,6 +12,7 @@ import (
 func TestEvent_Handle(t *testing.T) {
 	t.Parallel()
 	t.Run("Should call to create call repository", func(t *testing.T) {
+		t.Parallel()
 		rc := &mocks.RepositoryCalls{}
 		rc.On("CreateCall", mock.Anything, mock.Anything, mock.Anything).
 			Return(nil)
@@ -20,6 +21,7 @@ func TestEvent_Handle(t *testing.T) {
 		assert.NoError(t, err)
 	})
 	t.Run("Should return error because the event is incorrect", func(t *testing.T) {
+		t.Parallel()
 		rc := &mocks.RepositoryCalls{}
 		rc.On("CreateCall", mock.Anything, mock.Anything, mock.Anything).
 			Return(nil)

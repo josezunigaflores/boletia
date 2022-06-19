@@ -9,15 +9,18 @@ import (
 )
 
 type Service struct {
-	Request        internal.RepositoryHttp
+	Request        internal.RepositoryHTTP
 	Repository     internal.RepositoryCurrency
 	timeOut        int
 	timeOutRequest int
 	eventBus       event.Bus
 }
 
-func NewServiceSchedule(request internal.RepositoryHttp, repository internal.RepositoryCurrency, timeOut, timeOutRequest int, eventBus event.Bus) *Service {
-	return &Service{Request: request, Repository: repository, timeOut: timeOut, eventBus: eventBus, timeOutRequest: timeOutRequest}
+func NewServiceSchedule(request internal.RepositoryHTTP,
+	repository internal.RepositoryCurrency,
+	timeOut, timeOutRequest int, eventBus event.Bus) *Service {
+	return &Service{Request: request, Repository: repository, timeOut: timeOut,
+		eventBus: eventBus, timeOutRequest: timeOutRequest}
 }
 
 func (s Service) Do() {

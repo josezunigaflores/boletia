@@ -14,7 +14,7 @@ type Currency struct {
 }
 
 //go:generate mockery --case=snake --outpkg=mocks --output=mocks --name=RepositoryHttp
-type RepositoryHttp interface {
+type RepositoryHTTP interface {
 	GetCurrencies() (Currencies, *MetaData, event.Event, error)
 }
 
@@ -57,7 +57,7 @@ func (c Code) IsAll() bool {
 	return c == "all"
 }
 
-//"YYYY-MM-DDThh:mm:ss"
+// YYYY-MM-DDThh:mm:ss.
 const layout = "2006-01-02T15:04:05"
 
 func NewTimeFilter(t string) (FilterTime, error) {
