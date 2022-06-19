@@ -4,6 +4,7 @@ import (
 	"boletia/cmd/api/bootstrap"
 	_ "boletia/docs"
 	_ "boletia/internal/plataform/server/handler/currency"
+
 	log "github.com/sirupsen/logrus"
 )
 

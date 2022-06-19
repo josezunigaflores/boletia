@@ -19,13 +19,16 @@ func (c Currency) getCurrency() (internal.Currencies, error) {
 	currencies := make(internal.Currencies, 0)
 	valuesCurrency := c
 	for _, currency := range valuesCurrency {
-		currencyData := currency.(map[string]interface{})
+		currencyData, ok := currency.(map[string]interface{})
+		if !ok {
+			return nil, ErrNotFoundCurrencies
+		}
 		curr := internal.Currency{}
 		for _, d := range currencyData {
 			// Check the type from the value in the map.
-			switch d.(type) {
+			switch d.(type) { //nolint:gocritic,gosimple
 			case string:
-				val, ok := d.(string)
+				val, ok := d.(string) //nolint:gosimple
 				// should be ever true because the switch check the type.
 				if !ok {
 					return nil, ErrNotFoundCurrencies
@@ -33,7 +36,7 @@ func (c Currency) getCurrency() (internal.Currencies, error) {
 				curr.Code = val
 			case float64:
 				// should be ever true because the switch check the type.
-				val, ok := d.(float64)
+				val, ok := d.(float64) //nolint:gosimple
 				if !ok {
 					return nil, ErrNotFoundCurrencies
 				}

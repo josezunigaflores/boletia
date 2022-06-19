@@ -43,5 +43,5 @@ func (b *EventBus) Subscribe(evtType event.Type, handler event.Handler) {
 		b.handlers[evtType] = []event.Handler{handler}
 	}
 
-	subscribersForType = append(subscribersForType, handler)
+	subscribersForType = append(subscribersForType, handler) //nolint: ineffassign,staticcheck,wastedassign
 }

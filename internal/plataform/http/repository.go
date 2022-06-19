@@ -5,6 +5,7 @@ import (
 	"boletia/kit/event"
 	"encoding/json"
 	"io"
+	"net"
 	"net/http"
 	"time"
 )
@@ -16,18 +17,25 @@ const (
 
 type RepositoryCurrency struct {
 	path   string
-	client http.Client
+	client *http.Client
 }
 
 func NewRepositoryCurrency(path string, timeOut int) RepositoryCurrency {
-	c := http.Client{}
+	c := &http.Client{
+		Transport: &http.Transport{
+			Dial: (&net.Dialer{
+				Timeout: time.Duration(timeOut) * time.Second,
+			}).Dial,
+			TLSHandshakeTimeout: time.Duration(timeOut) * time.Second,
+		},
+	}
 	c.Timeout = time.Duration(timeOut) * time.Second
 
 	return RepositoryCurrency{path: path, client: c}
 }
 
 func (rc RepositoryCurrency) GetCurrencies() (internal.Currencies, *internal.MetaData, event.Event, error) {
-	resp, err := rc.client.Get(rc.path)
+	resp, err := rc.client.Get(rc.path) // nolint:noctx
 	if err != nil {
 		return nil, nil, internal.NewCurrencyFailEvent(time.Now().UTC(), rc.client.Timeout, fail), err
 	}

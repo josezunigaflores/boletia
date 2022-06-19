@@ -14,8 +14,6 @@ import (
 
 	swaggerFiles "github.com/swaggo/files"
 
-	_ "boletia/docs"
-
 	"github.com/gin-gonic/gin"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
