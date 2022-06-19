@@ -46,10 +46,9 @@ func TestRepository_CreateCurrencies(t *testing.T) {
 	})
 }
 
-/*+
 func TestRepository_FindWithDate(t *testing.T) {
 	t.Parallel()
-	t.Run("Should get elements of currency", func(t *testing.T) {
+	t.Run("Should get elements of currency by date", func(t *testing.T) {
 		t.Parallel()
 		db, mock, err := sqlmock.New(sqlmock.QueryMatcherOption(sqlmock.QueryMatcherEqual))
 		require.NoError(t, err)
@@ -66,17 +65,43 @@ func TestRepository_FindWithDate(t *testing.T) {
 		q := `SELECT * FROM "sql_currency" WHERE (code = $1 AND last_updated_at >= $2 AND last_updated_at < $3)
 AND "sql_currency"."deleted_at" IS NULL`
 		mock.ExpectQuery(q).
-			WithArgs(faker.Word(), t1, t2).
-			WillReturnRows(sqlmock.NewRows([]string{"code", "value"}).
-				AddRow(faker.Word(), 10.0))
+			WithArgs(string(code), time.Time(t1), time.Time(t2)).
+			WillReturnRows(sqlmock.NewRows([]string{"code", "value", "last_updated_at"}).
+				AddRow(string(code), 0, time.Now().UTC()))
 		s := NewRepository(gormDB)
 
 		_, err = s.FindWithDate(code, t1, t2)
 		assert.NoError(t, mock.ExpectationsWereMet())
 		assert.NoError(t, err)
 	})
-}.
-*/
+
+	t.Run("Should get elements of currency", func(t *testing.T) {
+		t.Parallel()
+		db, mock, err := sqlmock.New(sqlmock.QueryMatcherOption(sqlmock.QueryMatcherEqual))
+		require.NoError(t, err)
+		gormDB, err := gorm.Open(postgres.New(postgres.Config{
+			Conn: db,
+		}), &gorm.Config{})
+		code, err := internal.NewCode(faker.Word())
+		assert.NoError(t, err)
+		t1, errF2 := internal.NewTimeFilter("2022-11-28T20:15:00")
+		assert.NoError(t, errF2)
+		t2, errF1 := internal.NewTimeFilter("2022-12-28T20:15:00")
+		assert.NoError(t, errF1)
+		require.NoError(t, err)
+		_, _ = t1, t2
+		q := `SELECT * FROM "sql_currency" WHERE "sql_currency"."deleted_at" IS NULL`
+		mock.ExpectQuery(q).
+			WillReturnRows(sqlmock.NewRows([]string{"code", "value", "last_updated_at"}).
+				AddRow(string(code), 0, time.Now().UTC()))
+		s := NewRepository(gormDB)
+
+		_, err = s.Find()
+		assert.NoError(t, mock.ExpectationsWereMet())
+		assert.NoError(t, err)
+	})
+}
+
 type AnyTime struct{}
 
 func (a AnyTime) Match(v driver.Value) bool {

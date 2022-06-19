@@ -71,3 +71,7 @@ func NewTimeFilter(t string) (FilterTime, error) {
 
 	return FilterTime(newTime), nil
 }
+
+func (ft FilterTime) String() string {
+	return time.Time(ft).String()
+}
