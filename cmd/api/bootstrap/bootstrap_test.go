@@ -6,14 +6,15 @@ import (
 	"boletia/internal/mocks"
 	"boletia/internal/plataform/bus/inmemory"
 	"boletia/internal/plataform/server/handler/currency"
-	"github.com/bxcodec/faker/v3"
-	"github.com/gin-gonic/gin"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/mock"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 	"time"
+
+	"github.com/bxcodec/faker/v3"
+	"github.com/gin-gonic/gin"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
 )
 
 func TestGetCurrenciesWithoutDBIIntegration(t *testing.T) {

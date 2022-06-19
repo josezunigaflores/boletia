@@ -6,14 +6,16 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	swaggerFiles "github.com/swaggo/files"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"time"
 
+	swaggerFiles "github.com/swaggo/files"
+
 	_ "boletia/docs"
+
 	"github.com/gin-gonic/gin"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
