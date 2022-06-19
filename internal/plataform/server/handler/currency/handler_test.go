@@ -4,12 +4,13 @@ import (
 	"boletia/internal/utils"
 	"boletia/kit/command/commandmocks"
 	"errors"
-	"github.com/gin-gonic/gin"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/mock"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/gin-gonic/gin"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
 )
 
 var errAnythingTest = errors.New("error anything")

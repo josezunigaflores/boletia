@@ -1,10 +1,11 @@
 package http
 
 import (
-	log "github.com/sirupsen/logrus"
-	"github.com/stretchr/testify/assert"
 	"testing"
 	"time"
+
+	log "github.com/sirupsen/logrus"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestCurrency_getCurrency(t *testing.T) {

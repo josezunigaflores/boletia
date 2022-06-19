@@ -28,7 +28,7 @@ type Server struct {
 	commandBus command.Bus
 }
 
-func New(ctx context.Context, host string, port uint, shutdownTimeout time.Duration, commandBus command.Bus) (context.Context, Server) {
+func New(ctx context.Context, host string, port uint, shutdownTimeout time.Duration, commandBus command.Bus) (context.Context, Server) { //nolint:lll
 	srv := Server{
 		engine:   gin.New(),
 		httpAddr: fmt.Sprintf(":%d", port),
