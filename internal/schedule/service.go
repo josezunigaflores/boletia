@@ -16,9 +16,7 @@ type Service struct {
 	eventBus       event.Bus
 }
 
-func NewServiceSchedule(request internal.RepositoryHTTP,
-	repository internal.RepositoryCurrency,
-	timeOut, timeOutRequest int, eventBus event.Bus) *Service {
+func NewServiceSchedule(request internal.RepositoryHTTP, repository internal.RepositoryCurrency, timeOut, timeOutRequest int, eventBus event.Bus) *Service { // nolint:whitespace
 	return &Service{Request: request, Repository: repository, timeOut: timeOut,
 		eventBus: eventBus, timeOutRequest: timeOutRequest}
 }

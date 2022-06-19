@@ -23,17 +23,17 @@ func NewCurrencyCommand(code string, finit string, fend string) *Command {
 	return &Command{code: code, finit: finit, fend: fend}
 }
 
-type CurrencyHandler struct {
+type Handler struct {
 	service Service
 }
 
-func NewCurrencyHandler(service Service) *CurrencyHandler {
-	return &CurrencyHandler{service: service}
+func NewCurrencyHandler(service Service) *Handler {
+	return &Handler{service: service}
 }
 
 var errUnexpected = errors.New("unexpected command")
 
-func (ch CurrencyHandler) Handle(ctx context.Context, cmd command.Command) (response utils.Response, err error) {
+func (ch Handler) Handle(ctx context.Context, cmd command.Command) (response utils.Response, err error) {
 	cc, ok := cmd.(*Command)
 	if !ok {
 		err := errUnexpected

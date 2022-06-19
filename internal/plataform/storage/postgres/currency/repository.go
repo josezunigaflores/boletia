@@ -4,8 +4,9 @@ import (
 	"boletia/internal"
 	"errors"
 	"fmt"
-	"gorm.io/gorm"
 	"time"
+
+	"gorm.io/gorm"
 )
 
 var (

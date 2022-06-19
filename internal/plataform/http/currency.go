@@ -41,7 +41,6 @@ func (c Currency) getCurrency() (internal.Currencies, error) {
 			}
 		}
 		currencies = append(currencies, curr)
-
 	}
 
 	return currencies, nil

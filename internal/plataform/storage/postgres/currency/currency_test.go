@@ -2,9 +2,10 @@ package currency
 
 import (
 	"boletia/internal/plataform/storage/postgres"
+	"testing"
+
 	"github.com/bxcodec/faker/v3"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestCurrencies_ToCurrencies(t *testing.T) {

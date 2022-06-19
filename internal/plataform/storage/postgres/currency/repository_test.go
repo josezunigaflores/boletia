@@ -3,14 +3,15 @@ package currency
 import (
 	"boletia/internal"
 	"database/sql/driver"
+	"testing"
+	"time"
+
 	"github.com/DATA-DOG/go-sqlmock"
 	"github.com/bxcodec/faker/v3"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"testing"
-	"time"
 )
 
 func TestRepository_CreateCurrencies(t *testing.T) {
