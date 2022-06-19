@@ -1,13 +1,14 @@
 package http
 
 import (
-	"github.com/bxcodec/faker/v3"
-	"github.com/stretchr/testify/assert"
 	"io"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"testing"
+
+	"github.com/bxcodec/faker/v3"
+	"github.com/stretchr/testify/assert"
 )
 
 const timeout = 60

@@ -5,10 +5,11 @@ import (
 	"boletia/internal/mocks"
 	"boletia/kit/event/eventmocks"
 	"context"
-	"github.com/bxcodec/faker/v3"
-	"github.com/stretchr/testify/mock"
 	"testing"
 	"time"
+
+	"github.com/bxcodec/faker/v3"
+	"github.com/stretchr/testify/mock"
 )
 
 func TestService_Do(t *testing.T) {

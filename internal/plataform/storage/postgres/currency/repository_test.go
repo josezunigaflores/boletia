@@ -34,7 +34,7 @@ func TestRepository_CreateCurrencies(t *testing.T) {
 		c = append(c, currencyToCreate)
 		m := internal.MetaData{LastUpdateAt: time.Now()}
 		assert.NoError(t, err)
-		q := `INSERT INTO "sql_currency" ("created_at","updated_at","deleted_at","code","value","last_updated_at") VALUES ($1,$2,$3,$4,$5,$6)`
+		q := `INSERT INTO "sql_currency" ("created_at","updated_at","deleted_at","code","value","last_updated_at") VALUES ($1,$2,$3,$4,$5,$6)` // nolint:lll
 		mock.ExpectBegin()
 		mock.ExpectExec(q).
 			WithArgs(AnyTime{}, AnyTime{}, nil, currencyToCreate.Code, currencyToCreate.Value, m.LastUpdateAt).
