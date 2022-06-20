@@ -31,7 +31,8 @@ func GetCurrencies(bus command.Bus) gin.HandlerFunc {
 		if !ok {
 			data = nil
 		}
-		ctx.JSON(response.Code(), ResponseCurrencies{
+
+		ctx.JSON(500, ResponseCurrencies{
 			HTTPResponse: utils.HTTPResponse{
 				Code:    response.Code(),
 				Message: response.Message(""),

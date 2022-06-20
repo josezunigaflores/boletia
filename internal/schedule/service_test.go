@@ -14,7 +14,7 @@ import (
 
 func TestService_Do(t *testing.T) {
 	t.Run("Should do infinite loop ", func(t *testing.T) {
-		mockhttp := &mocks.RepositoryHttp{}
+		mockhttp := &mocks.RepositoryHTTP{}
 		mockEvnet := &eventmocks.Event{}
 		c := make(internal.Currencies, 0)
 		c = append(c, internal.Currency{
