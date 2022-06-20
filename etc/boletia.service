@@ -1,0 +1,29 @@
+[Unit]
+Description=boletia service
+ConditionPathExists=./../cmd/api/main
+After=network.target
+
+[Service]
+Type=simple
+User=boletia
+Group=boletia
+LimitNOFILE=1024
+
+Restart=on-failure
+RestartSec=10
+startLimitIntervalSec=60
+
+WorkingDirectory=./../cmd/api/main
+ExecStart=./../cmd/api/main
+
+# make sure log directory exists and owned by syslog
+PermissionsStartOnly=true
+ExecStartPre=/bin/mkdir -p /var/log/boletia
+ExecStartPre=/bin/chown syslog:adm /var/log/boletia
+ExecStartPre=/bin/chmod 755 /var/log/boletia
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=boletia
+
+[Install]
+WantedBy=multi-user.target
