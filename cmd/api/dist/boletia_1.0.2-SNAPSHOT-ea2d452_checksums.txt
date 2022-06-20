@@ -1,5 +1,0 @@
-03083e405927cbe328c3590dedeef866da87059018412518b26071c2936281de  boletia_1.0.2-SNAPSHOT-ea2d452_darwin_arm64.tar.gz
-1c5454a18b460f1d43d03724cbd56669bb846e40c021793c7d7228121d7d794a  boletia_1.0.2-SNAPSHOT-ea2d452_linux_amd64.tar.gz
-3a7d5194fa382683b5bf665dab6c07e028deeb317b2ea2bf2feff63665407f1b  boletia_1.0.2-SNAPSHOT-ea2d452_linux_386.tar.gz
-4b9384ea3444a40c7f809100de1c456e6130bb50aa221d5e9d4f9bfaa8ace91b  boletia_1.0.2-SNAPSHOT-ea2d452_linux_arm64.tar.gz
-bda8f6ac7be5223473ece92dab6080325626a2253b7ee5d91a221dbad3f76cc4  boletia_1.0.2-SNAPSHOT-ea2d452_darwin_amd64.tar.gz

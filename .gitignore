@@ -19,5 +19,5 @@
 
 recursos
 coverage.html
-
+dist
 .goreleaser.yaml
