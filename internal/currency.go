@@ -13,7 +13,7 @@ type Currency struct {
 	LastUpdatedAt time.Time
 }
 
-//go:generate mockery --case=snake --outpkg=mocks --output=mocks --name=RepositoryHttp
+//go:generate mockery --case=snake --outpkg=mocks --output=mocks --name=RepositoryHTTP
 type RepositoryHTTP interface {
 	GetCurrencies() (Currencies, *MetaData, event.Event, error)
 }
